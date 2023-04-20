@@ -1,14 +1,15 @@
-//First attempt without sorting/removing impossible elements 
+//First attempt without sorting/removing impossible elements
+//Not very optomized, worst case scenario is unlikely for random arrays, but would take a very long time 
 function hasTargetSum(array, target) {
   // Write your algorithm here
-  const start = performance.now()
-  for(let n = 0; n < array.length; n++) {
-    const num = array[n]
-    if(!!array.find((number) => number !== num?number === (target-num):false)) {
-      return [true, (performance.now() - start)]
+    for(let n = 0; n < array.length; n++) {
+      const num = array[0]
+      array.shift(0, 1) 
+      if(!!array.find((number) => number === (target-num))) {
+        return true
+      }   
     }
-  }
-  return [false, (performance.now() - start)]
+  return false
 }
 
 
@@ -53,20 +54,18 @@ const createRandomTest = (arrayLength) => {
 // You can run `node index.js` to view these console logs
 if (require.main === module) {
   // add your own custom tests in here
-  console.log("Expecting: true");
-  console.log("=>", hasTargetSum([3, 8, 12, 4, 11, 7], 10));
+  // console.log("Expecting: true");
+  // console.log("=>", hasTargetSum([3, 8, 12, 4, 11, 7], 10));
 
-  console.log("");
+  // console.log("");
 
-  console.log("Expecting: true");
-  console.log("=>", hasTargetSum([22, 19, 4, 6, 30], 25));
+  // console.log("Expecting: true");
+  // console.log("=>", hasTargetSum([22, 19, 4, 6, 30], 25));
 
-  console.log("");
+  // console.log("");
 
-  console.log("Expecting: false");
-  console.log("=>", hasTargetSum([1, 2, 5], 4));
-  
-  createRandomTest(10000000)
+  // console.log("Expecting: false");
+  // console.log("=>", hasTargetSum([1, 2, 5], 4));
 }
 
 module.exports = hasTargetSum;
